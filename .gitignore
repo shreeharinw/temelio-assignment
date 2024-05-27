@@ -1,0 +1,28 @@
+.DS_Store
+# Compiled class file
+./Backend/target/*
+./Backend/*.class
+
+# Log files
+./Backend/*.log
+
+# IntelliJ IDEA files
+./Backend/.idea/*
+./Backend/*.iml
+./Backend/*.iws
+./Backend/*.
+./Backend/.DS_Store
+
+
+# Dependency directories
+./Frontend/node_modules/
+./Frontend/.pnp
+./Frontend/.pnp.js
+
+# Directory for compiled output
+./Frontend/build/
+./Frontend/dist/
+
+# IDE files
+./Frontend/.vscode/
+./Frontend/.idea
