@@ -12,17 +12,3 @@
 ./Backend/*.iws
 ./Backend/*.
 ./Backend/.DS_Store
-
-
-# Dependency directories
-./Frontend/node_modules/
-./Frontend/.pnp
-./Frontend/.pnp.js
-
-# Directory for compiled output
-./Frontend/build/
-./Frontend/dist/
-
-# IDE files
-./Frontend/.vscode/
-./Frontend/.idea
