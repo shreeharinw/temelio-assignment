@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmailDataService  {
@@ -16,10 +17,14 @@ public class EmailDataService  {
     private final EmailDataRepository emailDataRepository;
     private final NonProfitService nonProfitService;
 
+    private final EmailNotifier emailNotifier;
+
     @Autowired
-    public EmailDataService(EmailDataRepository emailDataRepository, NonProfitService nonProfitService) {
+    public EmailDataService(EmailDataRepository emailDataRepository, NonProfitService nonProfitService,
+                            EmailNotifier emailNotifier) {
         this.emailDataRepository = emailDataRepository;
         this.nonProfitService = nonProfitService;
+        this.emailNotifier= emailNotifier;
     }
 
     public List<EmailData> getEmailDataByFoundationId(Long foundationId) {
@@ -31,14 +36,8 @@ public class EmailDataService  {
     }
     
     public EmailData saveEmailData(EmailData emailData) {
-        for(NonProfit nonProfit: emailData.getNonProfits()){
-            NonProfit nonProfitObj = nonProfitService.getNonProfitById(nonProfit.getId()).get();
-            System.out.println("** Sending email **");
-            System.out.println("Email body:");
-            System.out.println("Sending money to nonprofit " + nonProfitObj.getName() + " at address " + nonProfitObj.getAddress());
-            System.out.println("** Email sent successfully! **");
-        }
-
+        List<NonProfit> nonProfits = nonProfitService.getAllByIds(emailData.getNonProfits().stream().map(NonProfit::getId).collect(Collectors.toList()));
+        emailNotifier.notify(nonProfits);
         return emailDataRepository.save(emailData);
     }
 

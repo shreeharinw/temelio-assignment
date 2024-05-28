@@ -27,6 +27,10 @@ public class NonProfitService{
         return nonProfitRepository.findAll();
     }
 
+    public List<NonProfit> getAllByIds(List<Long> ids) {
+        return nonProfitRepository.findByIdIn(ids);
+    }
+
     
     public Optional<NonProfit> getNonProfitById(Long id) {
         return nonProfitRepository.findById(id);
