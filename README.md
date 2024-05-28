@@ -22,15 +22,20 @@ This is a web application developed using React JS for the frontend and Java wit
 
 1. **Clone the Repository**: Clone this repository to your local machine using the following command: `git clone https://github.com/shreeharinw/temelio-assignment.git`
    
-2. **Open Project in IntelliJ IDEA**:
+2. **Start the Application in IntelliJ IDEA**:
 - Open IntelliJ IDEA.
 - Choose `File` > `Open` and select the Backend directory of the cloned repository.
+- Navigate to the Java backend directory (`src/main/java`) in the project.
+- Run the main application file (usually `Application.java`) to start the Spring Boot backend server.
+- Open `http://localhost:8080/` and use the application
 
-3. **Start the Backend Server**:
+### Running the Application in developement mode
+
+1. **Start the Backend Server**:
 - Navigate to the Java backend directory (`src/main/java`) in the project.
 - Run the main application file (usually `Application.java`) to start the Spring Boot backend server.
 
-4. **Start the Frontend Development Server**:
+2. **Start the Frontend Development Server**:
 - Open a new terminal.
 - Navigate to the `frontend` directory in the project.
 - Run the following commands to install dependencies and start the development server:
@@ -39,11 +44,11 @@ This is a web application developed using React JS for the frontend and Java wit
   npm start
   ```
 
-5. **Access the Application**:
+3. **Access the Application**:
 - Once both the backend and frontend servers are running, open a web browser.
 - Go to `http://localhost:3000` to access the application.
 
-6. **How to integrate Backend and Frontend**:
+4. **How to integrate Backend and Frontend**:
 - Run the following commands in the `fronend` directory
     ```
     npm run build

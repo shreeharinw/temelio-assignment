@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-
 import 'primereact/resources/themes/saga-blue/theme.css'; // Theme CSS
 import 'primereact/resources/primereact.min.css'; // Core CSS
 import axios from 'axios';
+import './EmailData.css'; // Import your custom CSS file
 
 const EmailData = ({ foundations }) => {
   const [selectedFoundation, setSelectedFoundation] = useState(null);
@@ -26,8 +26,8 @@ const EmailData = ({ foundations }) => {
   }, [selectedFoundation]);
 
   return (
-    <div className="p-grid">
-      <div className="p-col">
+    <div className="email-data-container">
+      <div className="dropdown-container">
         <Dropdown
           value={selectedFoundation}
           options={foundations.map(f => {
@@ -36,39 +36,40 @@ const EmailData = ({ foundations }) => {
           onChange={(e) => setSelectedFoundation(e.value)}
           optionLabel="name"
           placeholder="Select Foundation"
+          className="foundation-dropdown"
         />
-        <DataTable value={emails}>
-          <Column field="id" header="ID" />
-          <Column field="message" header="Message" />
-          <Column header="Non-Profit Name" body={(rowData) => {
-            return (
-              <>
-                {rowData.nonProfits.map((nonProfit, index) => (
-                  <div key={index}>{nonProfit.name}</div>
-                ))}
-              </>
-            );
-          }} />
-          <Column header="Non-Profit Email" body={(rowData) => {
-            return (
-              <>
-                {rowData.nonProfits.map((nonProfit, index) => (
-                  <div key={index}>{nonProfit.email}</div>
-                ))}
-              </>
-            );
-          }} />
-          <Column header="Non-Profit Address" body={(rowData) => {
-            return (
-              <>
-                {rowData.nonProfits.map((nonProfit, index) => (
-                  <div key={index}>{nonProfit.address}</div>
-                ))}
-              </>
-            );
-          }} />
-        </DataTable>
       </div>
+      <DataTable value={emails} className="emails-table">
+        <Column field="id" header="ID" />
+        <Column field="message" header="Message" />
+        <Column header="Non-Profit Name" body={(rowData) => {
+          return (
+            <>
+              {rowData.nonProfits.map((nonProfit, index) => (
+                <div key={index}>{nonProfit.name}</div>
+              ))}
+            </>
+          );
+        }} />
+        <Column header="Non-Profit Email" body={(rowData) => {
+          return (
+            <>
+              {rowData.nonProfits.map((nonProfit, index) => (
+                <div key={index}>{nonProfit.email}</div>
+              ))}
+            </>
+          );
+        }} />
+        <Column header="Non-Profit Address" body={(rowData) => {
+          return (
+            <>
+              {rowData.nonProfits.map((nonProfit, index) => (
+                <div key={index}>{nonProfit.address}</div>
+              ))}
+            </>
+          );
+        }} />
+      </DataTable>
     </div>
   );
 };

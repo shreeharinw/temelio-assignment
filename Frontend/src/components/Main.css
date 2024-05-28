@@ -1,0 +1,19 @@
+/* Main.css */
+.container {
+    margin: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
+  
+  .p-mb-3 {
+    margin-bottom: 1rem !important;
+  }
+  
+  .p-button-primary {
+    min-width: 200px;
+  }
+  

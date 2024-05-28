@@ -1,0 +1,26 @@
+/* AddData.css */
+.dialog-container {
+    padding: 20px;
+  }
+  
+  .tab-view {
+    margin-bottom: 20px;
+  }
+  
+  .p-field {
+    margin-bottom: 1rem;
+  }
+  
+  .p-error {
+    color: red;
+    font-size: 0.875rem;
+  }
+  
+  .p-button-primary {
+    min-width: 6rem;
+  }
+  
+  .p-d-flex.p-jc-end {
+    margin-top: 1rem;
+  }
+  

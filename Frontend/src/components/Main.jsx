@@ -9,6 +9,7 @@ import AddData from './AddData';
 import { Button } from 'primereact/button';
 import NonProfits from './NonProfits';
 import EmailData from './EmailData';
+import './Main.css'; // Import your custom CSS file
 
 const Main = () => {
   const [foundations, setFoundations] = useState([]);
@@ -37,8 +38,8 @@ const Main = () => {
 
   return (
     <div className="container">
-      <div className="p-mb-3">
-        <Button label="Add Data" className="p-button-primary" onClick={() => setDisplayAddData(true)} />
+      <div className="button-container p-mb-3">
+        <Button label="Add Foundation/Non-Profit" className="p-button-primary" onClick={() => setDisplayAddData(true)} />
       </div>
       <TabView>
         <TabPanel header="Foundations">
@@ -49,21 +50,9 @@ const Main = () => {
           </DataTable>
         </TabPanel>
         <TabPanel header="Non-Profits">
-          {/* <DataTable value={nonProfits} className="p-datatable-striped">
-            <Column field="id" header="ID" />
-            <Column field="name" header="Name" />
-            <Column field="address" header="Address" />
-            <Column field="email" header="Email" />
-          </DataTable> */}
           <NonProfits foundations={foundations} nonProfits={nonProfits}/>
         </TabPanel>
         <TabPanel header="Emails">
-          {/* <DataTable value={nonProfits} className="p-datatable-striped">
-            <Column field="id" header="ID" />
-            <Column field="name" header="Name" />
-            <Column field="address" header="Address" />
-            <Column field="email" header="Email" />
-          </DataTable> */}
           <EmailData foundations={foundations}/>
         </TabPanel>
       </TabView>

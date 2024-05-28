@@ -1,0 +1,40 @@
+/* NonProfits.css */
+.non-profits-container {
+    padding: 20px;
+  }
+  
+  .dropdown-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .info-icon {
+    margin-left: 10px;
+    font-size: 1.2rem;
+    color: #007ad9;
+    cursor: pointer;
+  }
+  
+  .send-email-button {
+    margin-top: 20px;
+  }
+  
+  .send-email-dialog .dialog-content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .message-textarea {
+    margin-top: 10px;
+    width: 100%;
+    resize: none;
+  }
+  
+  .dialog-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
