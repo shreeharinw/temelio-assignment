@@ -1,0 +1,38 @@
+.grant-table {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .p-datatable {
+    font-size: 14px;
+  }
+  
+  .col-id,
+  .col-amount,
+  .col-stage,
+  .col-grant-type,
+  .col-duration {
+    text-align: center;
+  }
+  
+  .col-submission-name,
+  .col-email,
+  .col-nonprofit-name,
+  .col-tags {
+    text-align: left;
+  }
+  
+  .upload-button {
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .upload-button:hover {
+    background-color: #0056b3;
+  }
+  

@@ -19,6 +19,10 @@ public class FoundationService {
     }
 
 
+    public Optional<Foundation> findByEmail(String email) {
+        return foundationRepository.findByEmail(email);
+    }
+
     public Foundation saveFoundation(Foundation foundation) {
         return foundationRepository.save(foundation);
     }

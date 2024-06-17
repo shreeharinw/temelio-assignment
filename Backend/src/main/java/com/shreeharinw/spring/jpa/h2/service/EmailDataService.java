@@ -37,7 +37,7 @@ public class EmailDataService  {
     
     public EmailData saveEmailData(EmailData emailData) {
         List<NonProfit> nonProfits = nonProfitService.getAllByIds(emailData.getNonProfits().stream().map(NonProfit::getId).collect(Collectors.toList()));
-        emailNotifier.notify(nonProfits);
+        emailNotifier.notify(nonProfits, emailData.getMessage());
         return emailDataRepository.save(emailData);
     }
 

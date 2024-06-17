@@ -29,6 +29,10 @@ public class NonProfit {
     @JsonIgnore
     private Set<EmailData> emailData;
 
+    @OneToMany(mappedBy = "nonProfit", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<GrantSubmission> grantSubmissions;
+
     public Set<EmailData> getEmailData() {
         return emailData;
     }

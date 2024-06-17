@@ -15,6 +15,27 @@ public class EmailData {
     @Column(nullable = false)
     private String message;
 
+    //Status status;
+    // DRAFT, SCHEDULED, SENT
+
+    /*
+    *  foundation
+    *  2 non_profits
+    *  message
+    *  save as draft
+    *
+    *  fill in the message, non_profits status as draft.
+    *  save this emailData.
+    *
+    *  again we can modify nonProfit.. json
+    *  mark the status as sent.
+    *
+    * */
+
+    //scheduledTime
+
+    //Ex., Json nonProfit;
+
     @ManyToOne
     @JoinColumn(name = "foundation_id", nullable = false)
     private Foundation foundation;

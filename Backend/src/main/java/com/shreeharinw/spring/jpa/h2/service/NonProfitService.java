@@ -31,7 +31,11 @@ public class NonProfitService{
         return nonProfitRepository.findByIdIn(ids);
     }
 
-    
+    public Optional<NonProfit> findByName(String name) {
+        return nonProfitRepository.findByName(name);
+    }
+
+
     public Optional<NonProfit> getNonProfitById(Long id) {
         return nonProfitRepository.findById(id);
     }

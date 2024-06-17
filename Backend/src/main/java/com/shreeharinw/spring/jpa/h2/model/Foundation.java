@@ -23,6 +23,9 @@ public class Foundation {
     @JsonIgnore
     private Set<EmailData> emailData;
 
+    @OneToMany(mappedBy = "foundationOwner", cascade = CascadeType.ALL)
+    private Set<GrantSubmission> grantSubmissions;
+
     public Set<EmailData> getEmailData() {
         return emailData;
     }
