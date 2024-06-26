@@ -19,11 +19,15 @@ public class GrantSubmissionController {
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadCSVFile(@RequestParam("file") MultipartFile file) {
-        String response = grantSubmissionService.uploadCSVFile(file);
-        if (response.startsWith("Failed") || response.startsWith("NonProfit or Foundation not found")) {
-            return ResponseEntity.status(500).body(response);
+        try{
+            String response = grantSubmissionService.uploadCSVFile(file);
+            if (response.startsWith("Failed") || response.startsWith("NonProfit or Foundation not found")) {
+                return ResponseEntity.status(500).body(response);
+            }
+            return ResponseEntity.ok(response);
+        }catch(Error e){
+            return ResponseEntity.status(500).body("failed");
         }
-        return ResponseEntity.ok(response);
     }
 
     @GetMapping

@@ -1,38 +1,86 @@
-.grant-table {
+.table-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .table-container table {
     width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
   }
   
-  .p-datatable {
-    font-size: 14px;
-  }
-  
-  .col-id,
-  .col-amount,
-  .col-stage,
-  .col-grant-type,
-  .col-duration {
-    text-align: center;
-  }
-  
-  .col-submission-name,
-  .col-email,
-  .col-nonprofit-name,
-  .col-tags {
+  .table-container th, .table-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
     text-align: left;
   }
   
-  .upload-button {
-    margin-bottom: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+  .table-container th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .table-container tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .table-container tr:hover {
+    background-color: #ddd;
+  }
+  
+  .filter-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+  
+  .tags-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .filter-icon {
     cursor: pointer;
+    font-size: 18px;
+    margin-left: 8px;
   }
   
-  .upload-button:hover {
-    background-color: #0056b3;
+  .dropdown-overlay {
+    position: absolute;
+    top: 245px;
+    right: 257px;
+    /* background-color: black; */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 200px;
+    padding: 10px;
+    color:black;
   }
   
+  .filter-container .react-select__control {
+    border-radius: 5px;
+    border: 1px solid black;
+    box-shadow: none;
+  }
+  
+  .filter-container .react-select__control--is-focused {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 1px #4CAF50;
+  }
+  
+  .filter-container .react-select__multi-value {
+    background-color: #4CAF50;
+  }
+  
+  .filter-container .react-select__multi-value__label {
+    color: black;
+  }
+  
+  .filter-container .react-select__multi-value__remove {
+    color: black;
+  }

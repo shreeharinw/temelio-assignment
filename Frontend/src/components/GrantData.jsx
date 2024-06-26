@@ -1,66 +1,116 @@
-import React, { useRef } from 'react';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import './GrantData.css';
+import React, { useState,useRef } from 'react';
+import Select from 'react-select';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import './GrantData.css'; // Make sure to import the CSS file
 
-const GrantData = ({ grants,onUploadSuccess }) => {
-  const fileInputRef = useRef(null);
-
-  const handleFileUpload = () => {
-    // Trigger the file input click programmatically
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      // Assuming you are using FormData to send the file
-      const formData = new FormData();
-      formData.append('file', file);
-
-      // Make POST API call to http://localhost:8080/api/grantsubmissions/upload
-      fetch('http://localhost:8080/api/grantsubmissions/upload', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => {
-        if (response.ok) {
-          alert('File uploaded successfully!');
-          onUploadSuccess();
-          // Optionally, you may want to fetch updated data or update state after successful upload
-        } else {
-          alert('Failed to upload file. Please try again.');
+const GrantData = ({ data,onUploadSuccess }) => {
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const fileInputRef = useRef(null);
+    const handleFileUpload = () => {
+        if (fileInputRef.current) {
+          fileInputRef.current.click();
         }
-      })
-      .catch(error => {
-        console.error('Error uploading file:', error);
-        alert('An error occurred while uploading the file. Please try again later.');
-      });
-    }
-  };
-
-  return (
-    <div className="grant-table">
-      <input type="file" accept=".csv" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} />
+      };
+    
+      const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const formData = new FormData();
+          formData.append('file', file);
+    
+          fetch('http://localhost:8080/api/grantsubmissions/upload', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => {
+            if (response.ok) {
+              alert('File uploaded successfully!');
+              onUploadSuccess();
+            } else {
+              alert('Failed to upload file. Please try again.');
+            }
+          })
+          .catch(error => {
+            console.error('Error uploading file:', error);
+            alert('An error occurred while uploading the file. Please try again later.');
+          });
+        }
+      };
+    
+    // Extract unique tags
+    const allTags = Array.from(new Set(data.flatMap(item => item.tags))).map(tag => ({ value: tag, label: tag }));
+  
+    // Filter data based on selected tags
+    const filteredData = selectedTags.length === 0
+      ? data
+      : data.filter(item => selectedTags.some(tag => item.tags.includes(tag.value)));
+  
+    // Toggle dropdown visibility
+    const toggleDropdown = () => setShowDropdown(!showDropdown);
+  
+    return (
+      <div className="table-container">
+           <input type="file" accept=".csv" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} />
       <button className="upload-button" onClick={handleFileUpload}>Upload Grants Info...</button>
-      
-      <DataTable value={grants} className="p-datatable-striped">
-        <Column field="id" header="Grant ID" className="col-id" />
-        <Column field="grantSubmissionName" header="Grant Submission Name" className="col-submission-name" />
-        <Column field="stage" header="Stage" className="col-stage" />
-        <Column field="foundationOwner.email" header="Foundation Owner Email" className="col-email" />
-        <Column field="requestedAmount" header="Requested Amount" className="col-amount" />
-        <Column field="awardedAmount" header="Awarded Amount" className="col-amount" />
-        <Column field="grantType" header="Grant Type" className="col-grant-type" />
-        <Column field="nonProfit.name" header="Nonprofit Name" className="col-nonprofit-name" />
-        <Column field="tags" header="Tags" className="col-tags" />
-        <Column field="durationStart" header="Duration Start" className="col-duration" />
-        <Column field="durationEnd" header="Duration End" className="col-duration" />
-      </DataTable>
-    </div>
-  );
-};
-
-export default GrantData;
+        <table>
+          <thead>
+            <tr>
+              <th>Grant ID</th>
+              <th>Grant Submission Name</th>
+              <th>Stage</th>
+              <th>Foundation Owner Email</th>
+              <th>Requested Amount</th>
+              <th>Awarded Amount</th>
+              <th>Grant Type</th>
+              <th>Nonprofit Name</th>
+              <th>
+                <div className="tags-header">
+                  <span>Tags</span>
+                  <FontAwesomeIcon
+                    icon={faFilter}
+                    className="filter-icon"
+                    color={selectedTags.length > 0 ? '#4CAF50' : '#000'}
+                    onClick={toggleDropdown}
+                  />
+                  {showDropdown && (
+                    <div className="dropdown-overlay">
+                      <Select
+                        isMulti
+                        options={allTags}
+                        onChange={setSelectedTags}
+                        placeholder="Select tags..."
+                        classNamePrefix="react-select"
+                      />
+                    </div>
+                  )}
+                </div>
+              </th>
+              <th>Duration Start</th>
+              <th>Duration End</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredData.map(item => (
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.grantSubmissionName}</td>
+                <td>{item.stage}</td>
+                <td>{item.foundationOwner.email}</td>
+                <td>{item.requestedAmount}</td>
+                <td>{item.awardedAmount}</td>
+                <td>{item.grantType}</td>
+                <td>{item.nonProfit.name}</td>
+                <td>{item.tags.join(', ')}</td>
+                <td>{item.durationStart}</td>
+                <td>{item.durationEnd}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+  
+  export default GrantData;

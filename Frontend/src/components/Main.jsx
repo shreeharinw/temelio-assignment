@@ -11,6 +11,7 @@ import NonProfits from './NonProfits';
 import EmailData from './EmailData';
 import './Main.css'; // Import your custom CSS file
 import './GrantData';
+// import GrantData from './GrantData';
 import GrantData from './GrantData';
 const Main = () => {
   const [foundations, setFoundations] = useState([]);
@@ -40,7 +41,14 @@ const Main = () => {
   const fetchGrantSubmissions = useCallback(() => {
     axios.get('http://localhost:8080/api/grantsubmissions')
       .then(response => {
-        setGrants(response.data);
+        let grants = response.data;
+        let editGrants = grants.map(grant=>{
+          return {
+            ...grant,
+            tags:grant.tags.join(",")
+          }
+        })
+        setGrants(grants);
       })
       .catch(error => {
         console.error('Error fetching grant submissions:', error);
@@ -80,7 +88,7 @@ const Main = () => {
           <EmailData foundations={foundations}/>
         </TabPanel>
         <TabPanel header="Grants">
-          <GrantData grants={grants} onUploadSuccess={handleSuccessfulUpload}/>
+          <GrantData data={grants} onUploadSuccess={handleSuccessfulUpload}/>
         </TabPanel>
       </TabView>
       {/* AddData modal */}
